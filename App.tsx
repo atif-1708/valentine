@@ -72,12 +72,13 @@ const App: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 overflow-hidden selection:bg-rose-200 selection:text-rose-900">
-      {/* Hidden Audio Element with autoPlay attribute */}
+      {/* Hidden Audio Element with autoPlay attribute and playsInline for mobile */}
       <audio 
         ref={audioRef} 
         src={BACKGROUND_MUSIC_URL} 
         loop 
         autoPlay
+        playsInline
         preload="auto"
         onError={(e) => console.error("Audio error:", e.currentTarget.error)}
       />
