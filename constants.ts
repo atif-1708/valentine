@@ -32,4 +32,4 @@ export const CONTRACT_CLAUSES: ContractClause[] = [
 
 // REPLACE THE URL BELOW WITH YOUR OWN MUSIC LINK
 // Example: "https://www.mysite.com/song.mp3"
-export const BACKGROUND_MUSIC_URL = "https://cdn.pixabay.com/audio/2024/01/16/audio_e2b992254f.mp3";
+export const BACKGROUND_MUSIC_URL = "https://ddg21s9t062h4.cloudfront.net/0mhxf%2Ffile%2F32df4f37347e18de6eb531047b4377a5_ec7f352e4a1009961f06108c82433fa3.mp3";

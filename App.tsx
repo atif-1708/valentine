@@ -14,11 +14,41 @@ const App: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Initialize volume
+  // Initialize volume and setup auto-play on first interaction
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = 0.4;
+      audioRef.current.volume = 0.5;
     }
+
+    const attemptPlay = () => {
+      if (audioRef.current && audioRef.current.paused) {
+        audioRef.current.play()
+          .then(() => {
+            setIsPlaying(true);
+            // Remove listeners once playing starts
+            document.removeEventListener('click', attemptPlay);
+            document.removeEventListener('touchstart', attemptPlay);
+            document.removeEventListener('keydown', attemptPlay);
+          })
+          .catch(err => {
+            console.log("Autoplay blocked by browser, waiting for interaction");
+          });
+      }
+    };
+
+    // Try immediately (might be blocked by browser)
+    attemptPlay();
+
+    // Try on any user interaction (click, touch, key press)
+    document.addEventListener('click', attemptPlay);
+    document.addEventListener('touchstart', attemptPlay);
+    document.addEventListener('keydown', attemptPlay);
+
+    return () => {
+      document.removeEventListener('click', attemptPlay);
+      document.removeEventListener('touchstart', attemptPlay);
+      document.removeEventListener('keydown', attemptPlay);
+    };
   }, []);
 
   const toggleMusic = () => {
@@ -36,48 +66,10 @@ const App: React.FC = () => {
 
   const handleOpenLetter = () => {
     setIsLetterOpen(true);
-    // Auto-play music when user interacts with the main button
+    // Ensure music plays if it hasn't already
     if (audioRef.current && !isPlaying) {
       audioRef.current.play()
         .then(() => setIsPlaying(true))
         .catch(err => console.error("Auto-play blocked:", err));
     }
   };
-
-  return (
-    <div className="relative min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 overflow-hidden selection:bg-rose-200 selection:text-rose-900">
-      {/* Hidden Audio Element */}
-      <audio ref={audioRef} src={BACKGROUND_MUSIC_URL} loop />
-
-      {/* Background Elements */}
-      <FloatingHearts />
-      <MusicPlayer 
-        isPlaying={isPlaying} 
-        onToggle={toggleMusic} 
-      />
-      
-      {/* Scroll-triggered popup */}
-      <ValentinePopup />
-
-      {/* Main Content */}
-      <main className="relative z-10">
-        <HeroSection onOpenLetter={handleOpenLetter} />
-        
-        <div className="container mx-auto">
-          <MemoriesGallery />
-          <RelationshipContract />
-        </div>
-      </main>
-
-      <Footer />
-
-      {/* Modals */}
-      <LoveLetter 
-        isOpen={isLetterOpen} 
-        onClose={() => setIsLetterOpen(false)} 
-      />
-    </div>
-  );
-};
-
-export default App;
