@@ -1,38 +1,37 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Music, VolumeX } from 'lucide-react';
-import { BACKGROUND_MUSIC_URL } from '../constants';
+import React from 'react';
+import { VolumeX, Volume2 } from 'lucide-react';
 
-const MusicPlayer: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+interface MusicPlayerProps {
+  isPlaying: boolean;
+  onToggle: () => void;
+}
 
-  const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play().catch(e => console.log("Audio play failed:", e));
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  // Set initial volume low
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.3;
-    }
-  }, []);
-
+const MusicPlayer: React.FC<MusicPlayerProps> = ({ isPlaying, onToggle }) => {
   return (
-    <div className="fixed top-4 right-4 z-50">
-      <audio ref={audioRef} src={BACKGROUND_MUSIC_URL} loop />
+    <div className="fixed top-4 right-4 z-50 flex items-center gap-3">
+       {!isPlaying && (
+        <span className="bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-rose-500 shadow-md animate-bounce hidden md:block">
+          Play Music 🎵
+        </span>
+      )}
+
+      {/* Play/Pause Button */}
       <button
-        onClick={togglePlay}
-        className="bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-all duration-300 text-rose-500 hover:scale-110"
+        onClick={onToggle}
+        className={`
+          p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 border-2
+          ${isPlaying 
+            ? 'bg-rose-500 text-white border-rose-600' 
+            : 'bg-white/80 backdrop-blur-sm text-rose-500 border-white'
+          }
+        `}
         title={isPlaying ? "Pause Music" : "Play Music"}
       >
-        {isPlaying ? <Music size={24} className="animate-pulse" /> : <VolumeX size={24} />}
+        {isPlaying ? (
+          <Volume2 size={24} className="animate-pulse" />
+        ) : (
+          <VolumeX size={24} />
+        )}
       </button>
     </div>
   );

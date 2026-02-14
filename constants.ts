@@ -30,5 +30,6 @@ export const CONTRACT_CLAUSES: ContractClause[] = [
   { id: 5, text: 'We promise to be each other’s biggest fans, forever.' },
 ];
 
-// Using a royalty-free romantic piano track
-export const BACKGROUND_MUSIC_URL = "https://cdn.pixabay.com/audio/2022/02/07/audio_18dc909063.mp3"; 
+// REPLACE THE URL BELOW WITH YOUR OWN MUSIC LINK
+// Example: "https://www.mysite.com/song.mp3"
+export const BACKGROUND_MUSIC_URL = "https://cdn.pixabay.com/audio/2024/01/16/audio_e2b992254f.mp3";
