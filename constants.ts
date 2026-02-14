@@ -13,7 +13,7 @@ I love you more than biryani… and you know that's serious. Like, incredibly se
 Thank you for being my partner, my best friend, and my greatest adventure.
 
 Forever yours,
-[Your Name]`;
+Atif`;
 
 export const MEMORIES: Memory[] = [
   { id: 1, url: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop', caption: 'Our chaos moment', rotation: -3 },
@@ -30,5 +30,5 @@ export const CONTRACT_CLAUSES: ContractClause[] = [
   { id: 5, text: 'We promise to be each other’s biggest fans, forever.' },
 ];
 
-// Using a reliable royalty-free romantic piano track
-export const BACKGROUND_MUSIC_URL = "https://ddg21s9t062h4.cloudfront.net/0mhxf%2Ffile%2F32df4f37347e18de6eb531047b4377a5_ec7f352e4a1009961f06108c82433fa3.mp3?response-content-disposition=inline%3Bfilename%3D%2232df4f37347e18de6eb531047b4377a5_ec7f352e4a1009961f06108c82433fa3.mp3%22%3B&response-content-type=audio%2Fmpeg&Expires=1771080328&Signature=hQ5b7d1WbIun1TjuMiCZ1z7hwR0NJiBj1ATZ2-ejX~yXAeTVzUbJwuRNe8SWFLgwi9-11ANRZbdyRYCIixBZf6mSmeB3-PiSV8ipS11mPJoaskl6Si7UAkLkMjIHAIiNKBYsvznBaiLs9E~GWenbgkCaQU9yFfqW4VYGMZHx2rvsjSws3Z3nTVaBLEeCgPDNJZdMx736LvY4s3Bo~iVQJyBreZQ8tJhYFyYg9W04X5CeurcD-QE2OZZvsGmortcsBDbFcnIlKwOTGFrgwz0DfVKrGrko~EbL5PGEsP9XZGY760B2sEVTPkW5Z05bLu2m7UZ11FgL~lCvw1WpGoqTmg__&Key-Pair-Id=APKAJT5WQLLEOADKLHBQ";
+// Using a reliable royalty-free romantic piano track from Pixabay
+export const BACKGROUND_MUSIC_URL = "https://cdn.pixabay.com/audio/2022/02/07/audio_196f74a74a.mp3";

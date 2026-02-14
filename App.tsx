@@ -17,37 +17,33 @@ const App: React.FC = () => {
   // Initialize volume and setup auto-play on first interaction
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = 0.5;
+      audioRef.current.volume = 0.4; // Slightly lower volume for background
     }
 
-    const attemptPlay = () => {
+    const playMusic = async () => {
       if (audioRef.current && audioRef.current.paused) {
-        audioRef.current.play()
-          .then(() => {
-            setIsPlaying(true);
-            // Remove listeners once playing starts
-            document.removeEventListener('click', attemptPlay);
-            document.removeEventListener('touchstart', attemptPlay);
-            document.removeEventListener('keydown', attemptPlay);
-          })
-          .catch(err => {
-            console.log("Autoplay blocked by browser, waiting for interaction");
-          });
+        try {
+          await audioRef.current.play();
+          setIsPlaying(true);
+          // Cleanup listeners if successful
+          ['click', 'touchstart', 'keydown', 'scroll'].forEach(event => 
+            document.removeEventListener(event, playMusic)
+          );
+        } catch (err) {
+          console.log("Autoplay blocked, waiting for user interaction");
+        }
       }
     };
 
-    // Try immediately (might be blocked by browser)
-    attemptPlay();
+    // Attempt immediately
+    playMusic();
 
-    // Try on any user interaction (click, touch, key press)
-    document.addEventListener('click', attemptPlay);
-    document.addEventListener('touchstart', attemptPlay);
-    document.addEventListener('keydown', attemptPlay);
+    // Add listeners for any user interaction to start music
+    const events = ['click', 'touchstart', 'keydown', 'scroll'];
+    events.forEach(event => document.addEventListener(event, playMusic));
 
     return () => {
-      document.removeEventListener('click', attemptPlay);
-      document.removeEventListener('touchstart', attemptPlay);
-      document.removeEventListener('keydown', attemptPlay);
+      events.forEach(event => document.removeEventListener(event, playMusic));
     };
   }, []);
 
@@ -66,21 +62,22 @@ const App: React.FC = () => {
 
   const handleOpenLetter = () => {
     setIsLetterOpen(true);
-    // Ensure music plays if it hasn't already
+    // Ensure music plays if it hasn't already (redundant backup)
     if (audioRef.current && !isPlaying) {
       audioRef.current.play()
         .then(() => setIsPlaying(true))
-        .catch(err => console.error("Auto-play blocked:", err));
+        .catch(() => {});
     }
   };
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 overflow-hidden selection:bg-rose-200 selection:text-rose-900">
-      {/* Hidden Audio Element */}
+      {/* Hidden Audio Element with autoPlay attribute */}
       <audio 
         ref={audioRef} 
         src={BACKGROUND_MUSIC_URL} 
         loop 
+        autoPlay
         preload="auto"
         onError={(e) => console.error("Audio error:", e.currentTarget.error)}
       />
