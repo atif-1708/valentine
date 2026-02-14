@@ -73,3 +73,47 @@ const App: React.FC = () => {
         .catch(err => console.error("Auto-play blocked:", err));
     }
   };
+
+  return (
+    <div className="relative min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 overflow-hidden selection:bg-rose-200 selection:text-rose-900">
+      {/* Hidden Audio Element */}
+      <audio 
+        ref={audioRef} 
+        src={BACKGROUND_MUSIC_URL} 
+        loop 
+        preload="auto"
+        onError={(e) => console.error("Audio error:", e.currentTarget.error)}
+      />
+
+      {/* Background Elements */}
+      <FloatingHearts />
+      <MusicPlayer 
+        isPlaying={isPlaying} 
+        onToggle={toggleMusic} 
+      />
+      
+      {/* Scroll-triggered popup */}
+      <ValentinePopup />
+
+      {/* Main Content */}
+      <main className="relative z-10">
+        <HeroSection onOpenLetter={handleOpenLetter} />
+        
+        <div className="container mx-auto">
+          <MemoriesGallery />
+          <RelationshipContract />
+        </div>
+      </main>
+
+      <Footer />
+
+      {/* Modals */}
+      <LoveLetter 
+        isOpen={isLetterOpen} 
+        onClose={() => setIsLetterOpen(false)} 
+      />
+    </div>
+  );
+};
+
+export default App;

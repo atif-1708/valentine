@@ -16,10 +16,10 @@ Forever yours,
 [Your Name]`;
 
 export const MEMORIES: Memory[] = [
-  { id: 1, url: 'https://picsum.photos/seed/love1/300/350', caption: 'Our chaos moment', rotation: -3 },
-  { id: 2, url: 'https://picsum.photos/seed/love2/300/350', caption: 'Proof we are cute', rotation: 4 },
-  { id: 3, url: 'https://picsum.photos/seed/love3/300/350', caption: 'Still not tired of you', rotation: -2 },
-  { id: 4, url: 'https://picsum.photos/seed/love4/300/350', caption: 'My favorite view', rotation: 5 },
+  { id: 1, url: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop', caption: 'Our chaos moment', rotation: -3 },
+  { id: 2, url: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=600&auto=format&fit=crop', caption: 'Proof we are cute', rotation: 4 },
+  { id: 3, url: 'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&w=600&auto=format&fit=crop', caption: 'Still not tired of you', rotation: -2 },
+  { id: 4, url: 'https://images.unsplash.com/photo-1621112904887-419379ce6824?q=80&w=600&auto=format&fit=crop', caption: 'My favorite view', rotation: 5 },
 ];
 
 export const CONTRACT_CLAUSES: ContractClause[] = [
@@ -30,6 +30,5 @@ export const CONTRACT_CLAUSES: ContractClause[] = [
   { id: 5, text: 'We promise to be each other’s biggest fans, forever.' },
 ];
 
-// REPLACE THE URL BELOW WITH YOUR OWN MUSIC LINK
-// Example: "https://www.mysite.com/song.mp3"
-export const BACKGROUND_MUSIC_URL = "https://ddg21s9t062h4.cloudfront.net/0mhxf%2Ffile%2F32df4f37347e18de6eb531047b4377a5_ec7f352e4a1009961f06108c82433fa3.mp3";
+// Using a reliable royalty-free romantic piano track
+export const BACKGROUND_MUSIC_URL = "https://ddg21s9t062h4.cloudfront.net/0mhxf%2Ffile%2F32df4f37347e18de6eb531047b4377a5_ec7f352e4a1009961f06108c82433fa3.mp3?response-content-disposition=inline%3Bfilename%3D%2232df4f37347e18de6eb531047b4377a5_ec7f352e4a1009961f06108c82433fa3.mp3%22%3B&response-content-type=audio%2Fmpeg&Expires=1771080328&Signature=hQ5b7d1WbIun1TjuMiCZ1z7hwR0NJiBj1ATZ2-ejX~yXAeTVzUbJwuRNe8SWFLgwi9-11ANRZbdyRYCIixBZf6mSmeB3-PiSV8ipS11mPJoaskl6Si7UAkLkMjIHAIiNKBYsvznBaiLs9E~GWenbgkCaQU9yFfqW4VYGMZHx2rvsjSws3Z3nTVaBLEeCgPDNJZdMx736LvY4s3Bo~iVQJyBreZQ8tJhYFyYg9W04X5CeurcD-QE2OZZvsGmortcsBDbFcnIlKwOTGFrgwz0DfVKrGrko~EbL5PGEsP9XZGY760B2sEVTPkW5Z05bLu2m7UZ11FgL~lCvw1WpGoqTmg__&Key-Pair-Id=APKAJT5WQLLEOADKLHBQ";
