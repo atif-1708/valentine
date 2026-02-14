@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { Music } from 'lucide-react';
 
-const ValentinePopup: React.FC = () => {
+interface ValentinePopupProps {
+  onStartMusic: () => void;
+}
+
+const ValentinePopup: React.FC<ValentinePopupProps> = ({ onStartMusic }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [answered, setAnswered] = useState(false);
   const [noCount, setNoCount] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Show when user scrolls down 40% of page
-      const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      if (scrollPercent > 30 && !answered && !showPopup) {
-        setShowPopup(true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [answered, showPopup]);
+    // Show popup almost immediately after load
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleYes = () => {
+    onStartMusic(); // Trigger music playback
     setAnswered(true);
     // Big heart explosion
     const scalar = 2;
@@ -34,7 +35,8 @@ const ValentinePopup: React.FC = () => {
       origin: { y: 0.6 } // Center screen vertically
     });
     
-    setTimeout(() => setShowPopup(false), 4000);
+    // Close popup faster so they can see the site
+    setTimeout(() => setShowPopup(false), 2500);
   };
 
   const handleNo = () => {
@@ -67,7 +69,7 @@ const ValentinePopup: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
         >
           <motion.div
             initial={{ scale: 0.8, y: 50 }}
@@ -76,10 +78,14 @@ const ValentinePopup: React.FC = () => {
           >
             {!answered ? (
               <>
-                <div className="text-6xl mb-4">💝</div>
-                <h3 className="text-3xl handwriting text-rose-600 mb-6">
+                <div className="text-6xl mb-4 animate-bounce">💌</div>
+                <h3 className="text-3xl handwriting text-rose-600 mb-2">
                    {noCount === 0 ? "Will you be my Valentine forever, Ayesha?" : "Pretty please? 🥺"}
                 </h3>
+                <p className="text-gray-500 mb-6 flex items-center justify-center gap-2 text-sm">
+                  <Music size={16} /> Turn on sound for the magic?
+                </p>
+                
                 <div className="flex flex-col gap-3 items-center w-full">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -120,6 +126,7 @@ const ValentinePopup: React.FC = () => {
                  <div className="text-6xl mb-4">😎</div>
                  <h3 className="text-3xl font-bold text-rose-600 mb-2">I knew it!</h3>
                  <p className="text-gray-600">Best decision you ever made.</p>
+                 <p className="text-sm text-rose-400 mt-2 animate-pulse">Playing our song... 🎵</p>
               </motion.div>
             )}
           </motion.div>

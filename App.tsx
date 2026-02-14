@@ -62,11 +62,13 @@ const App: React.FC = () => {
 
   const handleOpenLetter = () => {
     setIsLetterOpen(true);
-    // Ensure music plays if it hasn't already (redundant backup)
+  };
+
+  const handleStartMusic = () => {
     if (audioRef.current && !isPlaying) {
       audioRef.current.play()
         .then(() => setIsPlaying(true))
-        .catch(() => {});
+        .catch(err => console.error("Popup playback failed:", err));
     }
   };
 
@@ -90,8 +92,8 @@ const App: React.FC = () => {
         onToggle={toggleMusic} 
       />
       
-      {/* Scroll-triggered popup */}
-      <ValentinePopup />
+      {/* Instant Popup with music trigger */}
+      <ValentinePopup onStartMusic={handleStartMusic} />
 
       {/* Main Content */}
       <main className="relative z-10">
